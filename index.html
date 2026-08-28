@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Links & Payment Profile</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="page-bg"></div>
+
+    <div class="profile-card">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo-img">
+        </div>
+
+        <div class="actions">
+            <a href="https://instagram.com" target="_blank" class="btn modern-slide-btn" style="--delay: 1;">
+                <i class="fab fa-instagram btn-icon"></i>
+                <span class="btn-text">Instagram</span>
+                <div class="btn-shine"></div>
+            </a>
+
+            <a href="https://facebook.com" target="_blank" class="btn modern-slide-btn" style="--delay: 2;">
+                <i class="fab fa-facebook-f btn-icon"></i>
+                <span class="btn-text">Facebook</span>
+                <div class="btn-shine"></div>
+            </a>
+
+            <a href="https://tiktok.com" target="_blank" class="btn modern-slide-btn" style="--delay: 3;">
+                <i class="fab fa-tiktok btn-icon"></i>
+                <span class="btn-text">TikTok</span>
+                <div class="btn-shine"></div>
+            </a>
+
+            <button class="btn modern-slide-btn payment-trigger" id="openPaymentBtn" style="--delay: 4;">
+                <i class="fas fa-wallet btn-icon"></i>
+                <span class="btn-text">Payment Options</span>
+                <div class="btn-shine"></div>
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closePaymentBtn">&times;</button>
+            
+            <div class="modal-header">
+                <i class="fas fa-credit-card modal-icon"></i>
+                <h3>Select Payment Method</h3>
+            </div>
+            
+            <div class="payment-options">
+                <a href="tel:*9*7*01000000000*0%23" class="payment-btn-link">
+                    <i class="fas fa-mobile-alt pay-icon"></i>
+                    <span class="pay-text">Pay via Vodafone Cash</span>
+                </a>
+
+                <a href="https://instapay.eg" target="_blank" class="payment-btn-link">
+                    <i class="fas fa-university pay-icon"></i>
+                    <span class="pay-text">Pay via InstaPay</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
