@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
 
     <div class="page-bg"></div>
 
     <div class="profile-card">
-        <div class="logo-container">
+        <div class="logo-container" id="mainLogo">
             <img src="logo.png" alt="Logo" class="logo-img">
         </div>
 
         <div class="actions">
+            <!-- أزرار الروابط مع أنيميشن الدخول المطور -->
             <a href="https://instagram.com" target="_blank" class="btn modern-slide-btn" style="--delay: 1;">
                 <i class="fab fa-instagram btn-icon"></i>
                 <span class="btn-text">Instagram</span>
@@ -49,6 +49,7 @@
         </div>
     </div>
 
+    <!-- نافذة الدفع -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-content">
             <button class="close-btn" id="closePaymentBtn">&times;</button>
