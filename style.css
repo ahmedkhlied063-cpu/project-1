@@ -76,6 +76,7 @@ body {
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(243, 229, 200, 0.35);
 }
 
+/* حركة انزلاق اللوجو للجانب عند الضغط */
 .logo-container.shifted {
     transform: translateX(-140px) scale(0.85) rotate(-12deg) !important;
     box-shadow: -15px 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(243, 229, 200, 0.3);
@@ -99,11 +100,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    perspective: 1200px;
+    perspective: 1000px;
 }
 
 /* ==========================================
-   MAIN BUTTONS - ENHANCED LUXURY ENTRANCE
+   Main Buttons & Advanced Staggered Entrance
    ========================================== */
 .btn {
     width: 100%;
@@ -122,137 +123,51 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0 24px;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                border-color 0.4s ease, 
-                box-shadow 0.4s ease;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+                background 0.35s ease, 
+                border-color 0.35s ease, 
+                box-shadow 0.35s ease;
     outline: none;
     will-change: transform, background, box-shadow, filter;
 }
 
-/* ==========================================
-   🌟 ENHANCED STAGGERED ENTRANCE ANIMATION
-   ========================================== */
+/* دخول احترافي متدرج مع Blur وإمالة 3D */
 .modern-slide-btn {
     opacity: 0;
-    /* دخول متقدم: انزلاق + دوران + تمدد + ضبابية */
-    transform: translateY(70px) translateX(-30px) scale(0.85) rotateY(-25deg) rotateX(10deg);
-    filter: blur(16px);
-    /* أنيميشن رئيسي بتأثير ارتداد مرن */
-    animation: luxuryEntrance 1s cubic-bezier(0.16, 1.5, 0.3, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.12s + 0.1s);
+    transform: translateY(45px) scale(0.92) rotateX(-15deg);
+    filter: blur(12px);
+    animation: luxuryEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.14s + 0.15s);
 }
 
-/* تأثير الدخول الرئيسي مع ارتداد وتوهج */
 @keyframes luxuryEntrance {
     0% {
         opacity: 0;
-        transform: translateY(70px) translateX(-30px) scale(0.85) rotateY(-25deg) rotateX(10deg);
-        filter: blur(16px);
-    }
-    50% {
-        filter: blur(4px);
-        transform: translateY(-8px) translateX(0px) scale(1.02) rotateY(-5deg) rotateX(0deg);
+        transform: translateY(45px) scale(0.92) rotateX(-15deg);
+        filter: blur(12px);
     }
     70% {
-        transform: translateY(4px) translateX(0px) scale(0.99) rotateY(0deg) rotateX(0deg);
         filter: blur(0px);
-    }
-    85% {
-        transform: translateY(-2px) scale(1.005);
     }
     100% {
         opacity: 1;
-        transform: translateY(0) translateX(0) scale(1) rotateY(0deg) rotateX(0deg);
+        transform: translateY(0) scale(1) rotateX(0deg);
         filter: blur(0px);
     }
 }
 
-/* ==========================================
-   GLOW TRAIL - مسار توهج خلفي أثناء الدخول
-   ========================================== */
-.modern-slide-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(243, 229, 200, 0.25), transparent 70%);
-    transform: translate(-50%, -50%);
-    animation: glowTrail 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.12s + 0.2s);
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes glowTrail {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 0.6;
-    }
-    50% {
-        width: 300px;
-        height: 300px;
-        opacity: 0.5;
-    }
-    100% {
-        width: 500px;
-        height: 500px;
-        opacity: 0;
-    }
-}
-
-/* ==========================================
-   RIPPLE WAVE - تموج عند الدخول
-   ========================================== */
-.modern-slide-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    border: 2px solid rgba(243, 229, 200, 0.15);
-    animation: rippleEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.12s + 0.05s);
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(1.3);
-    z-index: 0;
-}
-
-@keyframes rippleEntrance {
-    0% {
-        opacity: 0.7;
-        transform: scale(1.3);
-    }
-    60% {
-        opacity: 0.6;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.98);
-    }
-}
-
-/* ==========================================
-   ICON & TEXT ENTRANCE - منفصل ومتناغم
-   ========================================== */
 .btn-icon {
     position: absolute;
     left: 24px !important;
     right: auto !important;
     font-size: 1.4rem;
     color: #F3E5C8;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
-    /* أنيميشن أيقونة متقدم: ارتداد مع دوران */
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    /* أنيميشن مكمل للأيقونة عند الدخول */
     opacity: 0;
-    transform: translateX(-25px) scale(0.5) rotate(-30deg);
-    animation: iconPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.12s + 0.35s);
-    z-index: 1;
+    transform: translateX(-15px) scale(0.7);
+    animation: iconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.14s + 0.4s);
 }
 
 .btn-text {
@@ -260,63 +175,38 @@ body {
     font-weight: 600;
     letter-spacing: 0.5px;
     text-align: center;
-    transition: color 0.3s ease, transform 0.4s ease;
-    /* أنيميشن نص متقدم: انزلاق مع شفافية متدرجة */
+    transition: color 0.3s ease, transform 0.3s ease;
+    /* أنيميشن مكمل للنص عند الدخول */
     opacity: 0;
-    transform: translateY(15px) scale(0.9);
-    animation: textFade 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.12s + 0.4s);
-    z-index: 1;
+    transform: translateY(8px);
+    animation: textFade 0.5s ease forwards;
+    animation-delay: calc(var(--delay) * 0.14s + 0.45s);
 }
 
 @keyframes iconPop {
-    0% {
-        opacity: 0;
-        transform: translateX(-25px) scale(0.5) rotate(-30deg);
-    }
-    60% {
+    to {
         opacity: 1;
-        transform: translateX(5px) scale(1.2) rotate(8deg);
-    }
-    80% {
-        transform: translateX(-2px) scale(0.95) rotate(-3deg);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0) scale(1) rotate(0deg);
+        transform: translateX(0) scale(1);
     }
 }
 
 @keyframes textFade {
-    0% {
-        opacity: 0;
-        transform: translateY(15px) scale(0.9);
-    }
-    60% {
+    to {
         opacity: 1;
-        transform: translateY(-3px) scale(1.03);
-    }
-    80% {
-        transform: translateY(2px) scale(0.98);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
     }
 }
 
-/* ==========================================
-   HOVER & ACTIVE EFFECTS - متطورة
-   ========================================== */
+/* Hover & Active Effects */
 .btn:hover {
     background: #F3E5C8;
     border-color: #F3E5C8;
-    box-shadow: 0 14px 40px rgba(243, 229, 200, 0.3), inset 0 0 30px rgba(243, 229, 200, 0.1);
-    transform: translateY(-5px) scale(1.02) rotateX(2deg);
+    box-shadow: 0 14px 30px rgba(243, 229, 200, 0.28);
+    transform: translateY(-4px) scale(1.015);
 }
 
 .btn:active {
-    transform: translateY(0px) scale(0.97) rotateX(0deg);
+    transform: translateY(-1px) scale(0.98);
     transition-duration: 0.1s;
 }
 
@@ -326,37 +216,23 @@ body {
 }
 
 .btn:hover .btn-icon {
-    transform: scale(1.3) rotate(-10deg) translateX(3px);
+    transform: scale(1.25) rotate(-8deg) translateX(2px);
 }
 
-.btn:hover .btn-text {
-    transform: translateX(4px);
-}
-
-/* Shine Effect - متطور مع انعكاس متعدد */
+/* Inner Shine Effect */
 .btn-shine {
     position: absolute;
-    top: -50%;
-    left: -150%;
-    width: 80%;
-    height: 200%;
-    background: linear-gradient(110deg, 
-        transparent 0%, 
-        transparent 30%, 
-        rgba(255, 255, 255, 0.25) 45%, 
-        rgba(255, 255, 255, 0.5) 50%, 
-        rgba(255, 255, 255, 0.25) 55%, 
-        transparent 70%, 
-        transparent 100%
-    );
-    transform: rotate(25deg);
-    transition: left 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transition: left 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
     z-index: 1;
-    pointer-events: none;
 }
 
 .btn:hover .btn-shine {
-    left: 180%;
+    left: 160%;
 }
 
 /* ==========================================
@@ -402,6 +278,7 @@ body {
     transform: scale(1) translateY(0);
 }
 
+/* Close Button Animation */
 .close-btn {
     position: absolute;
     top: 18px;
@@ -431,6 +308,7 @@ body {
     margin-bottom: 24px;
 }
 
+/* نبض أيقونة المودال */
 .modal-icon {
     font-size: 2.2rem;
     color: #F3E5C8;
@@ -449,6 +327,7 @@ body {
     font-weight: 600;
 }
 
+/* Payment Link Buttons inside Modal */
 .payment-options {
     display: flex;
     flex-direction: column;
@@ -471,6 +350,7 @@ body {
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease, color 0.3s ease;
 }
 
+/* ظهور متدرج لخيارات الدفع */
 .modal-overlay.active .payment-btn-link {
     opacity: 0;
     transform: translateY(20px) scale(0.98);
