@@ -27,15 +27,16 @@ body {
     width: 100vw;
     height: 100vh;
     background: url('logo.png') center/cover no-repeat;
-    filter: blur(40px) brightness(0.2);
-    transform: scale(1.1);
+    filter: blur(45px) brightness(0.2);
+    transform: scale(1.15);
     z-index: -1;
-    animation: pulseBg 8s ease-in-out infinite alternate;
+    animation: ambientFloat 14s ease-in-out infinite alternate;
 }
 
-@keyframes pulseBg {
-    from { transform: scale(1.1); filter: blur(40px) brightness(0.2); }
-    to { transform: scale(1.15); filter: blur(35px) brightness(0.25); }
+@keyframes ambientFloat {
+    0% { transform: scale(1.15) rotate(0deg); filter: blur(45px) brightness(0.2); }
+    50% { transform: scale(1.22) rotate(1.5deg); filter: blur(40px) brightness(0.25); }
+    100% { transform: scale(1.18) rotate(-1deg); filter: blur(50px) brightness(0.18); }
 }
 
 /* Profile Card */
@@ -45,15 +46,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation: cardEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: cardEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes cardEntrance {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(40px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Logo Setup */
+/* ==========================================
+   Logo Setup & Dynamic Shift Animation
+   ========================================== */
 .logo-container {
     width: 120px;
     height: 120px;
@@ -62,14 +65,20 @@ body {
     background: linear-gradient(135deg, #F3E5C8, rgba(243, 229, 200, 0.2));
     margin-bottom: 35px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(243, 229, 200, 0.15);
-    animation: logoPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: logoPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
     cursor: pointer;
+    will-change: transform;
 }
 
 .logo-container:hover {
-    transform: scale(1.05) rotate(2deg);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(243, 229, 200, 0.3);
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(243, 229, 200, 0.35);
+}
+
+.logo-container.shifted {
+    transform: translateX(-140px) scale(0.85) rotate(-12deg) !important;
+    box-shadow: -15px 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(243, 229, 200, 0.3);
 }
 
 .logo-img {
@@ -80,8 +89,8 @@ body {
 }
 
 @keyframes logoPop {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from { transform: scale(0) rotate(-15deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
 /* Actions Container */
@@ -90,10 +99,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    perspective: 1200px;
 }
 
 /* ==========================================
-   Main Buttons (Icons Left, Text Center)
+   MAIN BUTTONS - ENHANCED LUXURY ENTRANCE
    ========================================== */
 .btn {
     width: 100%;
@@ -112,54 +122,201 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0 24px;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                background 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                border-color 0.4s ease, 
+                box-shadow 0.4s ease;
     outline: none;
-    will-change: transform, background, box-shadow;
+    will-change: transform, background, box-shadow, filter;
 }
 
+/* ==========================================
+   🌟 ENHANCED STAGGERED ENTRANCE ANIMATION
+   ========================================== */
 .modern-slide-btn {
     opacity: 0;
-    transform: translateX(-100px);
-    animation: slideInFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--delay) * 0.15s);
+    /* دخول متقدم: انزلاق + دوران + تمدد + ضبابية */
+    transform: translateY(70px) translateX(-30px) scale(0.85) rotateY(-25deg) rotateX(10deg);
+    filter: blur(16px);
+    /* أنيميشن رئيسي بتأثير ارتداد مرن */
+    animation: luxuryEntrance 1s cubic-bezier(0.16, 1.5, 0.3, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.12s + 0.1s);
 }
 
-@keyframes slideInFromLeft {
-    to {
+/* تأثير الدخول الرئيسي مع ارتداد وتوهج */
+@keyframes luxuryEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(70px) translateX(-30px) scale(0.85) rotateY(-25deg) rotateX(10deg);
+        filter: blur(16px);
+    }
+    50% {
+        filter: blur(4px);
+        transform: translateY(-8px) translateX(0px) scale(1.02) rotateY(-5deg) rotateX(0deg);
+    }
+    70% {
+        transform: translateY(4px) translateX(0px) scale(0.99) rotateY(0deg) rotateX(0deg);
+        filter: blur(0px);
+    }
+    85% {
+        transform: translateY(-2px) scale(1.005);
+    }
+    100% {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0) translateX(0) scale(1) rotateY(0deg) rotateX(0deg);
+        filter: blur(0px);
     }
 }
 
-/* الأيقونات على اليسار */
+/* ==========================================
+   GLOW TRAIL - مسار توهج خلفي أثناء الدخول
+   ========================================== */
+.modern-slide-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(243, 229, 200, 0.25), transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: glowTrail 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.12s + 0.2s);
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes glowTrail {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.6;
+    }
+    50% {
+        width: 300px;
+        height: 300px;
+        opacity: 0.5;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   RIPPLE WAVE - تموج عند الدخول
+   ========================================== */
+.modern-slide-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    border: 2px solid rgba(243, 229, 200, 0.15);
+    animation: rippleEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.12s + 0.05s);
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1.3);
+    z-index: 0;
+}
+
+@keyframes rippleEntrance {
+    0% {
+        opacity: 0.7;
+        transform: scale(1.3);
+    }
+    60% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+}
+
+/* ==========================================
+   ICON & TEXT ENTRANCE - منفصل ومتناغم
+   ========================================== */
 .btn-icon {
     position: absolute;
     left: 24px !important;
     right: auto !important;
     font-size: 1.4rem;
     color: #F3E5C8;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    /* أنيميشن أيقونة متقدم: ارتداد مع دوران */
+    opacity: 0;
+    transform: translateX(-25px) scale(0.5) rotate(-30deg);
+    animation: iconPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.12s + 0.35s);
+    z-index: 1;
 }
 
-/* النص في المنتصف */
 .btn-text {
     font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-align: center;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.4s ease;
+    /* أنيميشن نص متقدم: انزلاق مع شفافية متدرجة */
+    opacity: 0;
+    transform: translateY(15px) scale(0.9);
+    animation: textFade 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(var(--delay) * 0.12s + 0.4s);
+    z-index: 1;
 }
 
-/* Hover & Active Effects */
+@keyframes iconPop {
+    0% {
+        opacity: 0;
+        transform: translateX(-25px) scale(0.5) rotate(-30deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(5px) scale(1.2) rotate(8deg);
+    }
+    80% {
+        transform: translateX(-2px) scale(0.95) rotate(-3deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes textFade {
+    0% {
+        opacity: 0;
+        transform: translateY(15px) scale(0.9);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-3px) scale(1.03);
+    }
+    80% {
+        transform: translateY(2px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ==========================================
+   HOVER & ACTIVE EFFECTS - متطورة
+   ========================================== */
 .btn:hover {
     background: #F3E5C8;
     border-color: #F3E5C8;
-    box-shadow: 0 12px 28px rgba(243, 229, 200, 0.25);
-    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 40px rgba(243, 229, 200, 0.3), inset 0 0 30px rgba(243, 229, 200, 0.1);
+    transform: translateY(-5px) scale(1.02) rotateX(2deg);
 }
 
 .btn:active {
-    transform: translateY(-1px) scale(0.98);
+    transform: translateY(0px) scale(0.97) rotateX(0deg);
     transition-duration: 0.1s;
 }
 
@@ -169,27 +326,41 @@ body {
 }
 
 .btn:hover .btn-icon {
-    transform: scale(1.25) rotate(-6deg);
+    transform: scale(1.3) rotate(-10deg) translateX(3px);
 }
 
-/* Inner Shine Effect */
+.btn:hover .btn-text {
+    transform: translateX(4px);
+}
+
+/* Shine Effect - متطور مع انعكاس متعدد */
 .btn-shine {
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.6s ease;
+    top: -50%;
+    left: -150%;
+    width: 80%;
+    height: 200%;
+    background: linear-gradient(110deg, 
+        transparent 0%, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.25) 45%, 
+        rgba(255, 255, 255, 0.5) 50%, 
+        rgba(255, 255, 255, 0.25) 55%, 
+        transparent 70%, 
+        transparent 100%
+    );
+    transform: rotate(25deg);
+    transition: left 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
     z-index: 1;
+    pointer-events: none;
 }
 
 .btn:hover .btn-shine {
-    left: 150%;
+    left: 180%;
 }
 
 /* ==========================================
-   Payment Modal & Link Buttons
+   Payment Modal & Smooth Scale
    ========================================== */
 .modal-overlay {
     position: fixed;
@@ -197,15 +368,15 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.4s ease, visibility 0.4s ease;
     z-index: 1000;
 }
 
@@ -216,15 +387,15 @@ body {
 
 .modal-content {
     background: linear-gradient(160deg, rgba(20, 40, 28, 0.95), rgba(10, 22, 15, 0.95));
-    border: 1px solid rgba(243, 229, 200, 0.3);
+    border: 1px solid rgba(243, 229, 200, 0.25);
     border-radius: 28px;
     padding: 30px 24px;
     width: 90%;
     max-width: 400px;
     position: relative;
-    transform: scale(0.7) translateY(40px);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    transform: scale(0.85) translateY(25px);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
 }
 
 .modal-overlay.active .modal-content {
@@ -238,21 +409,21 @@ body {
     background: rgba(243, 229, 200, 0.1);
     border: none;
     color: #F3E5C8;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     font-size: 1.3rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .close-btn:hover {
     background: #F3E5C8;
     color: #06110a;
-    transform: rotate(90deg) scale(1.1);
+    transform: rotate(90deg) scale(1.12);
 }
 
 .modal-header {
@@ -261,16 +432,16 @@ body {
 }
 
 .modal-icon {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #F3E5C8;
     margin-bottom: 8px;
     display: inline-block;
-    animation: iconBounce 2s infinite alternate ease-in-out;
+    animation: pulseIcon 2.5s ease-in-out infinite alternate;
 }
 
-@keyframes iconBounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-5px); }
+@keyframes pulseIcon {
+    0% { transform: translateY(0) scale(1); opacity: 0.9; }
+    100% { transform: translateY(-6px) scale(1.08); opacity: 1; }
 }
 
 .modal-header h3 {
@@ -278,7 +449,6 @@ body {
     font-weight: 600;
 }
 
-/* Payment Link Buttons inside Modal */
 .payment-options {
     display: flex;
     flex-direction: column;
@@ -298,24 +468,22 @@ body {
     justify-content: center;
     position: relative;
     padding: 0 20px;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease, color 0.3s ease;
 }
 
-/* ظهور متتابع لخيارات الدفع داخل البوب أب */
 .modal-overlay.active .payment-btn-link {
     opacity: 0;
-    transform: translateY(15px);
-    animation: modalLinkFade 0.4s ease forwards;
+    transform: translateY(20px) scale(0.98);
+    animation: modalLinkFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.modal-overlay.active .payment-btn-link:nth-child(1) { animation-delay: 0.15s; }
-.modal-overlay.active .payment-btn-link:nth-child(2) { animation-delay: 0.25s; }
-.modal-overlay.active .payment-btn-link:nth-child(3) { animation-delay: 0.35s; }
+.modal-overlay.active .payment-btn-link:nth-child(1) { animation-delay: 0.12s; }
+.modal-overlay.active .payment-btn-link:nth-child(2) { animation-delay: 0.22s; }
 
 @keyframes modalLinkFade {
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -325,7 +493,7 @@ body {
     right: auto !important;
     font-size: 1.2rem;
     color: #F3E5C8;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
 }
 
 .pay-text {
@@ -337,14 +505,10 @@ body {
 .payment-btn-link:hover {
     background: #F3E5C8;
     color: #06110a;
-    transform: translateY(-2px) scale(1.01);
-}
-
-.payment-btn-link:active {
-    transform: translateY(0) scale(0.98);
+    transform: translateY(-3px) scale(1.02);
 }
 
 .payment-btn-link:hover .pay-icon {
     color: #06110a;
-    transform: scale(1.2);
+    transform: scale(1.25) rotate(-5deg);
 }
